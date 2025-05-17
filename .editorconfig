@@ -1,0 +1,20 @@
+[*.cs]
+
+# IDE1006: Naming Styles
+# dotnet_diagnostic.IDE1006.severity = none
+
+# Regex style allowing PascalCase or camelCase
+[*]
+dotnet_naming_style.method_name_anycase.capitalization    = regex
+# dotnet_naming_style.method_name_anycase.regex             = ^(?:[A-Z][A-Za-z0-9]*|[a-z][A-Za-z0-9]*)$
+dotnet_naming_style.method_name_anycase.required_prefix   =
+dotnet_naming_style.method_name_anycase.required_suffix   =
+dotnet_naming_style.method_name_anycase.word_separator    =
+
+dotnet_naming_symbols.methods.applicable_kinds            = method
+dotnet_naming_symbols.methods.applicable_accessibilities  = *
+dotnet_naming_symbols.methods.required_modifiers          = *
+
+dotnet_naming_rule.methods_allow_pascal_or_camel.symbols  = methods
+dotnet_naming_rule.methods_allow_pascal_or_camel.style    = method_name_anycase
+dotnet_naming_rule.methods_allow_pascal_or_camel.severity = suggestion
