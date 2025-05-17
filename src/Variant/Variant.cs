@@ -1,6 +1,6 @@
 namespace KiriLib.Variant;
 
-internal readonly record struct Variant
+internal readonly struct Variant
 {
 	readonly byte _value;
 	Variant(byte value) => _value = value;
