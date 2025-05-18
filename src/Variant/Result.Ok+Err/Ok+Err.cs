@@ -42,7 +42,7 @@ partial class Result
 
 }
 
-partial class ResultCtorSuger {
+partial class ResultCtorSugar {
 extension (Result) {
 	public static Result.Ok<T> Err<T>() => new(Option.None<T>());
 	public static Result.Err<E> Ok<E>() => new(Option.None<E>());

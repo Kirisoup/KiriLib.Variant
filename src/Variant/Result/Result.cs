@@ -25,7 +25,7 @@ public readonly partial struct Result<T, E>
 
 public static partial class Result;
 
-public static partial class ResultCtorSuger {
+public static partial class ResultCtorSugar {
 extension (Result) {
 	public static Result<T, E> Ok<T, E>(T value) => new(Variant.Expected, value, default!);
 	public static __intermediates.Ok<T> Ok<T>(T value) => new(value);
