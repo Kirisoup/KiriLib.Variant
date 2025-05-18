@@ -18,6 +18,7 @@ public readonly partial struct Result<T, E>
 
 	public static implicit operator Result<T, E>(__intermediates.Ok<T> ok) => Result.Ok<T, E>(ok._value);
 	public static implicit operator Result<T, E>(__intermediates.Err<E> err) => Result.Err<T, E>(err._value);
+	public static implicit operator Result<T, E>(T value) => Result.Ok<T, E>(value);
 
 	[Obsolete("", error: true)] public Result() => throw new NotSupportedException();
 }
