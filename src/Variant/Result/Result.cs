@@ -22,10 +22,13 @@ public readonly partial struct Result<T, E>
 	[Obsolete("", error: true)] public Result() => throw new NotSupportedException();
 }
 
-public static partial class Result
-{
+public static partial class Result;
+
+public static partial class ResultCtorSuger {
+extension (Result) {
 	public static Result<T, E> Ok<T, E>(T value) => new(Variant.Expected, value, default!);
-	public static Result<T, E> Err<T, E>(E value) => new(Variant.Unexpected, default!, value);
 	public static __intermediates.Ok<T> Ok<T>(T value) => new(value);
+	public static Result<T, E> Err<T, E>(E value) => new(Variant.Unexpected, default!, value);
 	public static __intermediates.Err<E> Err<E>(E value) => new(value);
+}
 }

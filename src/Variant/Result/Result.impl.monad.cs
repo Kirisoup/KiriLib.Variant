@@ -40,14 +40,14 @@ partial struct Result<T, E>
 	public Result<U, E> and<U>(Result<U, E> other) => IsOk ? other : Result.Err<U, E>(_err);
 	public Result<U, E> and_then<U>(Func<T, Result<U, E>> f) => IsOk ? f(_ok) : Result.Err<U, E>(_err);
 
-	public Err<E> and(Err<E> other) => IsOk ? other : Result.Err(_err);
-	public Err<E> and_then(Func<T, Err<E>> f) => IsOk ? f(_ok) : Result.Err(_err);
+	public Result.Err<E> and(Result.Err<E> other) => IsOk ? other : Result.Err(_err);
+	public Result.Err<E> and_then(Func<T, Result.Err<E>> f) => IsOk ? f(_ok) : Result.Err(_err);
 
 	public Result<T, F> or<F>(Result<T, F> other) => IsErr ? other : Result.Ok<T, F>(_ok);
 	public Result<T, F> or_else<F>(Func<E, Result<T, F>> f) => IsErr ? f(_err) : Result.Ok<T, F>(_ok);
 
-	public Ok<T> or(Ok<T> other) => IsErr ? other : Result.Ok(_ok);
-	public Ok<T> or_else(Func<E, Ok<T>> f) => IsErr ? f(_err) : Result.Ok(_ok);
+	public Result.Ok<T> or(Result.Ok<T> other) => IsErr ? other : Result.Ok(_ok);
+	public Result.Ok<T> or_else(Func<E, Result.Ok<T>> f) => IsErr ? f(_err) : Result.Ok(_ok);
 }
 
 internal static class ToStringNullableUtil 

@@ -6,6 +6,9 @@ namespace KiriLib.Variant;
 [EditorBrowsable(EditorBrowsableState.Never)] 
 public static partial class __intermediates
 {
+	// use ref structs to prevent them from being returned or escaped accidentally
+	// might have performance benefits
+
 	public readonly ref struct None 
 	{
 		public Option<T> _<T>() => this; // _<> turbowhale
@@ -17,7 +20,7 @@ public static partial class __intermediates
 		internal Ok(T value) => _value = value;
 
 		public Result<T, E> _<E>() => this;
-		public KiriLib.Variant.Ok<T> _() => this;
+		public Result.Ok<T> _() => this;
 	}
 
 	public readonly ref struct Err<E>
@@ -26,16 +29,16 @@ public static partial class __intermediates
 		internal Err(E value) => _value = value;
 
 		public Result<T, E> _<T>() => this;
-		public KiriLib.Variant.Err<E> _() => this;
+		public Result.Err<E> _() => this;
 	}
 
 	public readonly ref struct Ok() 
 	{
-		public KiriLib.Variant.Err<E> _<E>() => this;
+		public Result.Err<E> _<E>() => this;
 	}
 
 	public readonly ref struct Err() 
 	{
-		public KiriLib.Variant.Ok<T> _<T>() => this;
+		public Result.Ok<T> _<T>() => this;
 	}
 }

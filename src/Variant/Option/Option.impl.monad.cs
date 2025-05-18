@@ -1,20 +1,28 @@
 namespace KiriLib.Variant;
 
 partial struct Option<T> 
-{	
+{
 	public T unwrap() => IsSome ? _some : throw new UnwrapException($"None<{typeof(T)}>");
 	public T expect(string msg) => IsSome ? _some : throw new ExpectException(msg);
+
+	/// <remarks>
+	/// <c>.some(or: _)</c>
+	/// </remarks>
 	public T some(T or) => IsSome ? _some : or;
+
+	/// <remarks>
+	/// <c>.some(or_else: _)</c>
+	/// </remarks>
 	public T some(Func<T> or_else) => IsSome ? _some : or_else();
 
-	public Ok<T> ok() => new(this);
-	public Err<T> err() => new(this);
+	public Result.Ok<T> ok() => new(this);
+	public Result.Err<T> err() => new(this);
 
 	/// <remarks>
 	/// <c>.ok(or: _)</c>
 	/// </remarks>
 	public Result<T, E> ok<E>(E or) => new(_var, _some, IsNone ? or : default!); 
-		// new(_var, _some, or) would be technically correct, but might pin a pointer in unexpected way
+		// new(_var, _some, or) would be technically correct, but might pin a pointer and get in the way of gc
 
 	/// <remarks>
 	/// <c>.ok(or_else: _)</c>
