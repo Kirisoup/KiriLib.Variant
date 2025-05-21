@@ -1,4 +1,6 @@
 #pragma warning disable CS0618
+using Kirisoup.Diagnostics.TypeUsageRules;
+
 namespace Kirisoup.Lib.Variant;
 
 partial class Result
@@ -10,6 +12,7 @@ partial class Result
 	/// Similar to Result&lt;T, ()> in rust, but since csharp does not have language support for ZSTs, 
 	/// it need to be its own type.
 	/// </remarks>
+	[NoDefault, NoNew]
 	public readonly partial struct Ok<T>
 	{
 		readonly Option<T> _opt;
@@ -29,6 +32,7 @@ partial class Result
 	/// Similar to Result&lt;(), E> in rust, but since csharp does not have language support for ZSTs, 
 	/// it need to be its own type.
 	/// </remarks>
+	[NoDefault, NoNew]
 	public readonly partial struct Err<E>
 	{
 		readonly Option<E> _opt;

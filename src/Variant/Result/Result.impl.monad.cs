@@ -8,8 +8,8 @@ partial struct Result<T, E>
 	public T expect(string msg) => IsOk ? _ok : throw new ExpectException(msg);
 	public E expect_err(string msg) => IsErr ? _err : throw new ExpectException(msg);
 
-	public Option<T> ok() => new(_var, _ok);
-	public Option<E> err() => new(_var.Invert(), _err);
+	public Option<T> ok() => new(_isOk, _ok);
+	public Option<E> err() => new(!_isOk, _err);
 
 	/// <remarks>
 	/// <c>.ok(or: _)</c>
@@ -21,8 +21,8 @@ partial struct Result<T, E>
 	/// </remarks>
 	public T ok(Func<T> or_else) => IsOk ? _ok : or_else();
 	
-	public Result<U, E> map<U>(Func<T, U> f) => new(_var, IsOk ? f(_ok) : default!, _err);
-	public Result<T, F> map_err<F>(Func<E, F> f) => new(_var, _ok, IsErr ? f(_err) : default!);
+	public Result<U, E> map<U>(Func<T, U> f) => new(_isOk, IsOk ? f(_ok) : default!, _err);
+	public Result<T, F> map_err<F>(Func<E, F> f) => new(_isOk, _ok, IsErr ? f(_err) : default!);
 
 	public Result<T, E> inspect(Action<T> f) { if (IsOk) f(_ok); return this; }
 	public Result<T, E> inspect_err(Action<E> f) { if (IsErr) f(_err); return this; }

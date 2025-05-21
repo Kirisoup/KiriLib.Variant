@@ -1,0 +1,3 @@
+[submodule "lib/Kirisoup.Diagnostics.TypeUsageRules"]
+	path = lib/Kirisoup.Diagnostics.TypeUsageRules
+	url = https://github.com/Kirisoup/Kirisoup.Diagnostics.TypeUsageRules.git

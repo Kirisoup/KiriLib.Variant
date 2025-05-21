@@ -21,25 +21,25 @@ partial struct Option<T>
 	/// <remarks>
 	/// <c>.ok(or: _)</c>
 	/// </remarks>
-	public Result<T, E> ok<E>(E or) => new(_var, _some, IsNone ? or : default!); 
+	public Result<T, E> ok<E>(E or) => new(_isSome, _some, IsNone ? or : default!); 
 		// new(_var, _some, or) would be technically correct, but might pin a pointer and get in the way of gc
 
 	/// <remarks>
 	/// <c>.ok(or_else: _)</c>
 	/// </remarks>
-	public Result<T, E> ok<E>(Func<E> or_else) => new(_var, _some, IsNone ? or_else() : default!);
+	public Result<T, E> ok<E>(Func<E> or_else) => new(_isSome, _some, IsNone ? or_else() : default!);
 
 	/// <remarks>
 	/// <c>.err(or: _)</c>
 	/// </remarks>
-	public Result<t, T> err<t>(t or) => new(_var.Invert(), IsNone ? or : default!, _some); 
+	public Result<t, T> err<t>(t or) => new(!_isSome, IsNone ? or : default!, _some); 
 
 	/// <remarks>
 	/// <c>.err(or_else: _)</c>
 	/// </remarks>
-	public Result<t, T> err<t>(Func<t> or_else) => new(_var.Invert(), IsNone ? or_else() : default!, _some);
+	public Result<t, T> err<t>(Func<t> or_else) => new(!_isSome, IsNone ? or_else() : default!, _some);
 
-	public Option<U> map<U>(Func<T, U> f) => new(_var, IsSome ? f(_some) : default!);
+	public Option<U> map<U>(Func<T, U> f) => new(_isSome, IsSome ? f(_some) : default!);
 	public Option<T> inspect(Action<T> f) { if (IsSome) f(_some); return this; }
 
 	/// <remarks>

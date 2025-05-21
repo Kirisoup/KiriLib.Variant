@@ -2,8 +2,8 @@ namespace Kirisoup.Lib.Variant;
 
 partial struct Result<T, E> 
 {
-	public bool IsOk => _var.IsExpected;
-	public bool IsErr => !_var.IsExpected;
+	public bool IsOk => _isOk;
+	public bool IsErr => !_isOk;
 
 	public bool IsOkAnd(Func<T, bool> predicate) => IsOk && predicate(_ok);
 	public bool IsErrOr(Func<T, bool> predicate) => IsErr || predicate(_ok);
