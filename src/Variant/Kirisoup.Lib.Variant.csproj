@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Version>0.1</Version>
-
 		<TargetFramework>net48</TargetFramework>
 		<LangVersion>preview</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -10,9 +8,19 @@
 
 		<RootNamespace>$(MSBuildProjectName)</RootNamespace>
     	<AssemblyName>$(RootNamespace)</AssemblyName>
+		<PackageId>$(RootNamespace)</PackageId>
+
+		<Version>0.1</Version>
+		<Authors>Kirisoup</Authors>
+		<Description>Provide variant types that enables handling errors as values</Description>
 
 		<DefineConstants Condition="'$(Configuration)' == 'Debug'">DEBUG;TRACE</DefineConstants>
 		<DefineConstants Condition="'$(Configuration)' == 'Release'">RELEASE</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(PackDir)' != ''">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(PackDir)</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>

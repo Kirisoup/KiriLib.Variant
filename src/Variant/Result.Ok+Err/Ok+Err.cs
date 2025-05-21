@@ -21,8 +21,6 @@ partial class Result
 		public static implicit operator Ok<T>(__intermediates.Ok<T> ok) => new(Option.Some(ok._value));
 		public static implicit operator Ok<T>(__intermediates.Err _) => new(Option.None<T>());
 		public static implicit operator Ok<T>(T value) => new(Option.Some(value));
-
-		[Obsolete("", error: true)] public Ok() => throw new NotSupportedException();
 	}
 
 	/// <summary>
@@ -40,10 +38,7 @@ partial class Result
 
 		public static implicit operator Err<E>(__intermediates.Ok _) => new(Option.None<E>());
 		public static implicit operator Err<E>(__intermediates.Err<E> err) => new(Option.Some(err._value));
-
-		[Obsolete("", error: true)] public Err() => throw new NotSupportedException();
 	}
-
 }
 
 partial class ResultCtorSugar {

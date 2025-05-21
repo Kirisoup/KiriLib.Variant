@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Kirisoup.Diagnostics.TypeUsageRules;
 
 namespace Kirisoup.Lib.Variant;
 
@@ -9,11 +10,13 @@ public static partial class __intermediates
 	// use ref structs to prevent them from being returned or escaped accidentally
 	// might have performance benefits
 
-	public readonly ref struct None 
+	[NoDefault]
+	public readonly ref struct None
 	{
 		public Option<T> _<T>() => this; // _<> turbowhale
 	}
 
+	[NoDefault, NoNew]
 	public readonly ref struct Ok<T>
 	{
 		internal readonly T _value;
@@ -23,6 +26,7 @@ public static partial class __intermediates
 		public Result.Ok<T> _() => this;
 	}
 
+	[NoDefault, NoNew]
 	public readonly ref struct Err<E>
 	{
 		internal readonly E _value;
@@ -32,11 +36,13 @@ public static partial class __intermediates
 		public Result.Err<E> _() => this;
 	}
 
+	[NoDefault]
 	public readonly ref struct Ok() 
 	{
 		public Result.Err<E> _<E>() => this;
 	}
 
+	[NoDefault]
 	public readonly ref struct Err() 
 	{
 		public Result.Ok<T> _<T>() => this;
