@@ -1,4 +1,4 @@
-namespace KiriLib.Variant;
+namespace Kirisoup.Lib.Variant;
 
 internal readonly struct Variant
 {

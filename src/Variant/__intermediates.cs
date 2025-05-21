@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace KiriLib.Variant;
+namespace Kirisoup.Lib.Variant;
 
 [Obsolete("types here are not suppsed to be directly interacted with. ")]
 [EditorBrowsable(EditorBrowsableState.Never)] 

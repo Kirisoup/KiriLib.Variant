@@ -1,5 +1,5 @@
 #pragma warning disable CS0618
-namespace KiriLib.Variant;
+namespace Kirisoup.Lib.Variant;
 
 partial class Result
 {

@@ -1,5 +1,5 @@
 #pragma warning disable CS0618
-namespace KiriLib.Variant;
+namespace Kirisoup.Lib.Variant;
 
 /// <summary>
 /// Representing either an ok result of <see cref="T" /> or an error result of <see cref="E" />
