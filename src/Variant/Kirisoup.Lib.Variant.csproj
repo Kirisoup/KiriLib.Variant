@@ -18,7 +18,7 @@
 		<DefineConstants Condition="'$(Configuration)' == 'Release'">RELEASE</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="$(PackDir)' != ''">
+	<PropertyGroup Condition="'$(PackDir)' != ''">
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageOutputPath>$(PackDir)</PackageOutputPath>
 	</PropertyGroup>
