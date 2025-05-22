@@ -57,4 +57,15 @@ partial struct Option<T>
 
 	public Option<T> or(Option<T> other) => IsNone ? other : this;
 	public Option<T> or_else(Func<Option<T>> f) => IsNone ? f() : this;
+
+	public Option<U> cast<U>() {
+		if (IsNone) return Option.None<U>();
+		if (_some is U u) return Option.Some(u);
+		try {
+			return Option.Some((U)((object?)_some)!);
+		}
+		catch (InvalidCastException) {
+			return Option.None<U>();
+		}
+	}
 }
