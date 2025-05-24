@@ -2,45 +2,38 @@ namespace Kirisoup.Lib.Variant;
 
 partial struct Result<T, E> 
 {
-	public bool IsOk => _isOk;
-	public bool IsErr => !_isOk;
+	public bool IsOk() => _isOk;
+	public bool IsErr() => !_isOk;
 
-	public bool IsOkAnd(Func<T, bool> predicate) => IsOk && predicate(_ok);
-	public bool IsErrOr(Func<T, bool> predicate) => IsErr || predicate(_ok);
-	public bool IsOkOr(Func<E, bool> predicate) => IsOk || predicate(_err);
-	public bool IsErrAnd(Func<E, bool> predicate) => IsErr && predicate(_err);
-	
-	// alternative to pattarn matching, 
-	// since csharp dont allow user defined type to overload pattern matching
+	public bool IsOkAnd(Func<T, bool> predicate) => _isOk && predicate(_ok);
+	public bool IsErrOr(Func<T, bool> predicate) => !_isOk || predicate(_ok);
+	public bool IsOkOr(Func<E, bool> predicate) => _isOk || predicate(_err);
+	public bool IsErrAnd(Func<E, bool> predicate) => !_isOk && predicate(_err);
 
 	/// <param name="ok">
 	/// is valid only if method returned true, 
 	/// otherwise zeroed or garbage data might be returned. 
 	/// </param>
-	public bool IsOkThen(out T ok) {
+	public bool IsOk(out T ok) {
 		ok = _ok;
-		return IsOk;
+		return _isOk;
 	}
 
 	/// <param name="err">
 	/// is valid only if method returned true, 
 	/// otherwise zeroed or garbage data might be returned. 
 	/// </param>
-	public bool IsErrThen(out E err) {
+	public bool IsErr(out E err) {
 		err = _err;
-		return IsErr;
+		return !_isOk;
 	}
 
-	/// <param name="ok">
-	/// is valid only if method returned true, 
-	/// otherwise zeroed or garbage data might be returned. 
-	/// </param>
-	/// <param name="err">
-	/// is valid only if method returned false, 
-	/// otherwise zeroed or garbage data might be returned. 
-	/// </param>
-	public bool IsOkThenOr(out T ok, out E err) {
-		(ok, err) = (_ok, _err);
-		return IsOk;
-	}
+	public T Unwrap() => _isOk ? _ok : throw new UnwrapException($"Err({_err.ToStringNullable()})");
+	public E UnwrapErr() => !_isOk ? _err : throw new UnwrapException($"Ok({_ok.ToStringNullable()})");
+
+	public T Expect(string msg) => _isOk ? _ok : throw new ExpectException(msg);
+	public E ExpectErr(string msg) => !_isOk ? _err : throw new ExpectException(msg);
+
+	public T OkOr(T @default) => _isOk ? _ok : @default;
+	public T OkOr(Func<T> @else) => _isOk ? _ok : @else();
 }

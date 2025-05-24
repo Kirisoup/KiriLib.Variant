@@ -9,9 +9,9 @@ namespace Kirisoup.Lib.Variant;
 [NoDefault, NoNew]
 public readonly partial struct Result<T, E>
 {
-	readonly bool _isOk;
-	readonly T _ok;
-	readonly E _err;
+	internal readonly bool _isOk;
+	internal readonly T _ok;
+	internal readonly E _err;
 
 	internal Result(bool isOk, T ok, E err) {
 		_isOk = isOk;
@@ -19,8 +19,8 @@ public readonly partial struct Result<T, E>
 		_err = err;
 	}
 
-	public static implicit operator Result<T, E>(__intermediates.Ok<T> ok) => Result.Ok<T, E>(ok._value);
-	public static implicit operator Result<T, E>(__intermediates.Err<E> err) => Result.Err<T, E>(err._value);
+	public static implicit operator Result<T, E>(Intermediates.Ok<T> ok) => Result.Ok<T, E>(ok._value);
+	public static implicit operator Result<T, E>(Intermediates.Err<E> err) => Result.Err<T, E>(err._value);
 	public static implicit operator Result<T, E>(T value) => Result.Ok<T, E>(value);
 }
 
@@ -29,8 +29,8 @@ public static partial class Result;
 public static partial class ResultCtorSugar {
 extension (Result) {
 	public static Result<T, E> Ok<T, E>(T value) => new(true, value, default!);
-	public static __intermediates.Ok<T> Ok<T>(T value) => new(value);
+	public static Intermediates.Ok<T> Ok<T>(T value) => new(value);
 	public static Result<T, E> Err<T, E>(E value) => new(false, default!, value);
-	public static __intermediates.Err<E> Err<E>(E value) => new(value);
+	public static Intermediates.Err<E> Err<E>(E value) => new(value);
 }
 }

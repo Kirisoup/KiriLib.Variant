@@ -10,8 +10,8 @@ namespace Kirisoup.Lib.Variant;
 [NoDefault, NoNew]
 public readonly partial struct Option<T>
 {
-	readonly bool _isSome;
-	readonly T _some;
+	internal readonly bool _isSome;
+	internal readonly T _some;
 
 	internal Option(bool isSome, T some)
 	{
@@ -20,12 +20,12 @@ public readonly partial struct Option<T>
 	}
 
 	public static implicit operator Option<T>(T value) => Option.Some(value);
-	public static implicit operator Option<T>(__intermediates.None _) => Option.None<T>();
+	public static implicit operator Option<T>(Intermediates.None _) => Option.None<T>();
 }
 
 public static class Option
 {
 	public static Option<T> Some<T>(T value) => new(true, value);
 	public static Option<T> None<T>() => new(false, default!);
-	public static __intermediates.None None() => new();
+	public static Intermediates.None None() => new();
 }

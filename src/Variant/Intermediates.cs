@@ -5,7 +5,7 @@ namespace Kirisoup.Lib.Variant;
 
 [Obsolete("types here are not suppsed to be directly interacted with. ")]
 [EditorBrowsable(EditorBrowsableState.Never)] 
-public static partial class __intermediates
+public static partial class Intermediates
 {
 	// use ref structs to prevent them from being returned or escaped accidentally
 	// might have performance benefits

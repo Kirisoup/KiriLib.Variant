@@ -15,11 +15,11 @@ partial class Result
 	[NoDefault, NoNew]
 	public readonly partial struct Ok<T>
 	{
-		readonly Option<T> _opt;
+		internal readonly Option<T> _opt;
 		internal Ok(Option<T> opt) => _opt = opt;
 
-		public static implicit operator Ok<T>(__intermediates.Ok<T> ok) => new(Option.Some(ok._value));
-		public static implicit operator Ok<T>(__intermediates.Err _) => new(Option.None<T>());
+		public static implicit operator Ok<T>(Intermediates.Ok<T> ok) => new(Option.Some(ok._value));
+		public static implicit operator Ok<T>(Intermediates.Err _) => new(Option.None<T>());
 		public static implicit operator Ok<T>(T value) => new(Option.Some(value));
 	}
 
@@ -33,11 +33,11 @@ partial class Result
 	[NoDefault, NoNew]
 	public readonly partial struct Err<E>
 	{
-		readonly Option<E> _opt;
+		internal readonly Option<E> _opt;
 		internal Err(Option<E> opt) => _opt = opt;
 
-		public static implicit operator Err<E>(__intermediates.Ok _) => new(Option.None<E>());
-		public static implicit operator Err<E>(__intermediates.Err<E> err) => new(Option.Some(err._value));
+		public static implicit operator Err<E>(Intermediates.Ok _) => new(Option.None<E>());
+		public static implicit operator Err<E>(Intermediates.Err<E> err) => new(Option.Some(err._value));
 	}
 }
 
@@ -45,7 +45,7 @@ partial class ResultCtorSugar {
 extension (Result) {
 	public static Result.Ok<T> Err<T>() => new(Option.None<T>());
 	public static Result.Err<E> Ok<E>() => new(Option.None<E>());
-	public static __intermediates.Err Err() => new();
-	public static __intermediates.Ok Ok() => new();
+	public static Intermediates.Err Err() => new();
+	public static Intermediates.Ok Ok() => new();
 }
 }
