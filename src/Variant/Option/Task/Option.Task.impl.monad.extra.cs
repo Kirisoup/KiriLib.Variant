@@ -16,7 +16,6 @@ partial struct Option<T> {partial struct Task
 }}
 
 partial class OptionTUImpl {
-extension <T, U> (Option<(T, U)>.Task self)  
-{
-	public async ValueTask<(Option<T>, Option<U>)> unzip() => (await self._task).unzip();
-}}
+	public static async ValueTask<(Option<T>, Option<U>)> unzip<T, U>(this Option<(T, U)>.Task self)
+		=> (await self._task).unzip();
+}
