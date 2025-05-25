@@ -18,8 +18,6 @@ partial class Result
 		public T Expect(string msg) => _opt.Expect(msg);
 		public void ExpectErr(string msg) { if (IsOk()) throw new ExpectException(msg); }
 
-		public Option<T> ToOption() => _opt;
-
 		public T OkOr(T @default) => _opt.SomeOr(@default);
 		public T OkOr(Func<T> @else) => _opt.SomeOr(@else);
 	}
@@ -39,7 +37,5 @@ partial class Result
 
 		public void Expect(string msg) { if (IsErr()) throw new ExpectException(msg); }
 		public E ExpectErr(string msg) => _opt.Expect(msg);
-
-		public Option<E> err() => _opt;
 	}
 }
