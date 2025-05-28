@@ -10,7 +10,7 @@
     	<AssemblyName>$(RootNamespace)</AssemblyName>
 		<PackageId>$(RootNamespace)</PackageId>
 
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Kirisoup</Authors>
 		<Description>Provide variant types that enables handling errors as values</Description>
 
@@ -24,7 +24,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Kirisoup.Diagnostics.TypeUsageRules" Version="1.1.2"/>
+		<PackageReference Include="Kirisoup.Diagnostics.TypeUsageRules" Version="1.1.3"/>
 
 		<PackageReference Include="PolySharp" Version="1.15.0" 
 			PrivateAssets="all" 
