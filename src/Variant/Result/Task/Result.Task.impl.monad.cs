@@ -36,6 +36,9 @@ partial struct Result<T, E> {partial struct Task
 	public Result<U, E>.Task and_then<U>(Func<T, Result<U, E>> f) => new(Tand_then(f));
 	async ValueTask<Result<U, E>> Tand_then<U>(Func<T, Result<U, E>> f) => (await _task).and_then(f);
 
+	public Result<U, E>.Task and_then<U>(Func<T, ValueTask<Result<U, E>>> f) => new(Tand_then(f));
+	async ValueTask<Result<U, E>> Tand_then<U>(Func<T, ValueTask<Result<U, E>>> f) => await (await _task).and_then(f);
+
 
 	public Result.Err<E>.Task and(Result.Err<E> other) => new(Tand_err(other));
 	async ValueTask<Result.Err<E>> Tand_err(Result.Err<E> other) => (await _task).and(other);
