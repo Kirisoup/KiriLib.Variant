@@ -18,6 +18,7 @@ partial struct Option<T>
 	{
 		internal readonly ValueTask<Option<T>> _task;
 		internal Task(ValueTask<Option<T>> task) => _task = task;
+		public ValueTask<Option<T>> ToTask() => _task;
 		public ValueTaskAwaiter<Option<T>> GetAwaiter() => _task.GetAwaiter();
 	}
 }

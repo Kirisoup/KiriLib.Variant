@@ -23,6 +23,7 @@ partial class Result
 		{
 			internal readonly ValueTask<Ok<T>> _task;
 			internal Task(ValueTask<Ok<T>> task) => _task = task;
+			public ValueTask<Ok<T>> ToTask() => _task;
 			public ValueTaskAwaiter<Ok<T>> GetAwaiter() => _task.GetAwaiter();
 		}
 	}
@@ -45,6 +46,7 @@ partial class Result
 		{
 			internal readonly ValueTask<Err<E>> _task;
 			internal Task(ValueTask<Err<E>> task) => _task = task;
+			public ValueTask<Err<E>> ToTask() => _task;
 			public ValueTaskAwaiter<Err<E>> GetAwaiter() => _task.GetAwaiter();
 		}
 	}

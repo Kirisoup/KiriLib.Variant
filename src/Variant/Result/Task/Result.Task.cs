@@ -26,6 +26,7 @@ partial struct Result<T, E>
 	{
 		internal readonly ValueTask<Result<T, E>> _task;
 		internal Task(ValueTask<Result<T, E>> task) => _task = task;
+		public ValueTask<Result<T, E>> ToTask() => _task;
 		public ValueTaskAwaiter<Result<T, E>> GetAwaiter() => _task.GetAwaiter();
 	}
 }
