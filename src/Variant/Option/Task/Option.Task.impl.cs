@@ -16,5 +16,4 @@ partial struct Option<T> {partial struct Task
 
 	public async ValueTask<T> SomeOr(T @default) => (await _task).SomeOr(@default);
 	public async ValueTask<T> SomeOr(Func<T> @else) => (await _task).SomeOr(@else);
-
 }}

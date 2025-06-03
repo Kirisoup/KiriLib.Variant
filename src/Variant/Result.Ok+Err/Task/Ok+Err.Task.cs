@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Kirisoup.Diagnostics.TypeUsageRules;
 
@@ -19,6 +20,7 @@ partial class Result
 			!_opt._isSome ? await f() : Result.Ok<T, E>(_opt._some);
 
 		[NoNew, NoDefault]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public readonly partial struct Task
 		{
 			internal readonly ValueTask<Ok<T>> _task;
@@ -42,6 +44,7 @@ partial class Result
 			_opt._isSome ? await f(_opt._some) : Result.Ok<F>();
 
 		[NoNew, NoDefault]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public readonly partial struct Task
 		{
 			internal readonly ValueTask<Err<E>> _task;
@@ -53,12 +56,6 @@ partial class Result
 }
 
 public static partial class TaskToMonad {
-extension <T> (ValueTask<Result.Ok<T>> task)
-{
-	public Result.Ok<T>.Task to_task_monad() => new(task);
-}
-extension <E> (ValueTask<Result.Err<E>> task)
-{
-	public Result.Err<E>.Task to_task_monad() => new(task);
-}
+	public static Result.Ok<T>.Task to_task_monad<T>(this ValueTask<Result.Ok<T>> task) => new(task);
+	public static Result.Err<E>.Task to_task_monad<E>(this ValueTask<Result.Err<E>> task) => new(task);
 }

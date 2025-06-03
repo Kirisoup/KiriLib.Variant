@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Kirisoup.Diagnostics.TypeUsageRules;
 
@@ -14,6 +15,7 @@ partial struct Option<T>
 		!_isSome ? await f() : this;
 
 	[NoNew, NoDefault]
+	[EditorBrowsable(EditorBrowsableState.Never)]
 	public readonly partial struct Task
 	{
 		internal readonly ValueTask<Option<T>> _task;
@@ -24,8 +26,5 @@ partial struct Option<T>
 }
 
 public static partial class TaskToMonad {
-extension <T> (ValueTask<Option<T>> task)
-{
-	public Option<T>.Task to_task_monad() => new(task);
-}
+	public static Option<T>.Task to_task_monad<T>(this ValueTask<Option<T>> task) => new(task);
 }
