@@ -35,7 +35,7 @@ partial class Result
 		public Result<T, E> map<T>(Func<T> f) => _opt.err(or_else: f);
 		public Err<F> map_err<F>(Func<E, F> f) => new(_opt.map(f));
 
-		public Err<E> inspec(Action f) { if (_opt._isSome) f(); return this; }
+		public Err<E> inspect(Action f) { if (_opt._isSome) f(); return this; }
 		public Err<E> inspect_err(Action<E> f) { if (_opt._isSome) f(_opt._some); return this; }
 		
 		public Err<E> and(Err<E> other) => new(_opt.or(other._opt));

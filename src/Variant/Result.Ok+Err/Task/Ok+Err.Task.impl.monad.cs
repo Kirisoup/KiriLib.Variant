@@ -18,6 +18,9 @@ partial class Result
 		public Task inspect(Action<T> f) => new(Tinspect(f));
 		async ValueTask<Ok<T>> Tinspect(Action<T> f) => (await _task).inspect(f);
 
+		public Task inspect_err(Action f) => new(Tinspect_err(f));
+		async ValueTask<Ok<T>> Tinspect_err(Action f) => (await _task).inspect_err(f);
+
 
 		public async ValueTask<U> map<U>(U or, Func<T, U> f) => (await _task).map(or, f);
 		public async ValueTask<U> map<U>(Func<U> or_else, Func<T, U> f) => (await _task).map(or_else, f);
@@ -66,6 +69,9 @@ partial class Result
 		public Err<F>.Task map_err<F>(Func<E, F> f) => new(Tmap_err(f));
 		async ValueTask<Err<F>> Tmap_err<F>(Func<E, F> f) => (await _task).map_err(f);
 
+
+		public Task inspect(Action f) => new(Tinspect(f));
+		async ValueTask<Err<E>> Tinspect(Action f) => (await _task).inspect(f);
 
 		public Task inspect_err(Action<E> f) => new(Tinspect_err(f));
 		async ValueTask<Err<E>> Tinspect_err(Action<E> f) => (await _task).inspect_err(f);
