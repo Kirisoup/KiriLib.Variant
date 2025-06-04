@@ -10,7 +10,7 @@
     	<AssemblyName>$(RootNamespace)</AssemblyName>
 		<PackageId>$(RootNamespace)</PackageId>
 
-		<Version>1.0.6</Version>
+		<Version>1.0.7</Version>
 		<Authors>Kirisoup</Authors>
 		<Description>Provide variant types that enables handling errors as values</Description>
 
