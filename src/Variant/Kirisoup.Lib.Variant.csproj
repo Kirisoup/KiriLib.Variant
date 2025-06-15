@@ -10,7 +10,7 @@
     	<AssemblyName>$(RootNamespace)</AssemblyName>
 		<PackageId>$(RootNamespace)</PackageId>
 
-		<Version>1.0.8</Version>
+		<Version>1.0.9</Version>
 		<Authors>Kirisoup</Authors>
 		<Description>Provide variant types that enables handling errors as values</Description>
 
@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Kirisoup.Diagnostics.TypeUsageRules" Version="1.1.4"/>
+		<PackageReference Include="Kirisoup.Diagnostics.TypeUsageRules" Version="1.1.5"/>
 
 		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" 
 			PrivateAssets="all" />
